@@ -2,6 +2,7 @@ import sys
 import math
 
 def calc_price(n, i, p):
+    minimum_number = [1, 5, 10, 100]
     if n <= 4:
         index = 0
     elif n <= 9:
@@ -10,29 +11,33 @@ def calc_price(n, i, p):
         index = 2
     else:
         index = 3
-     
-    value = 10
-    return int(value)
+    if index == 3:
+        return int(n * p[i][index])
+    else:
+        real_amount = int(n * p[i][index])
+        virtual_amount = int(minimum_number[index+1] * p[i][index+1])
+        if real_amount < virtual_amount:
+            return real_amount
+        else:
+            return virtual_amount
 
-prices_str = """Teddy Bear	5 Euro	5 Euro	4 Euro	4 Euro
-LBGT Barbie	55 Euro	49 Euro	39 Euro	35 Euro
-Train	25 Euro	25 Euro	22 Euro	19 Euro
-OGLE (TM)	125 Euro	99 Euro	79 Euro	69 Euro
-Star Trek Lightsaber	75 Euro	73 Euro	69 Euro	68 Euro"""
 prices = {}
-for line in prices_str.split("\n"):
-    line = line.split("\t")
-    prices[line[0]] = []
-    for element in line[1:]:
-        prices[line[0]].append(int(element.replace(" Euro", "")))
+prices["Teddy Bear"] = [5, 5, 4, 4]
+prices["LBGT Barbie"] = [55, 49, 39, 35]
+prices["Train"] = [25, 25, 22, 19]
+prices["OGLE (TM)"] = [125, 99, 79, 69]
+prices["Star Trek Lightsaber"] = [75, 73, 69, 68]
 
 my_input = []
 
 for line in sys.stdin:
-    my_input.append(line.replace("\n", ""))
+    line = line.replace("\r", "")
+    line = line.replace("\n", "")
+    my_input.append(line)
 
 sum_price = 0
-for i in my_input[1:]:
+num_products = int(my_input[0])
+for i in my_input[1:num_products+1]:
     index = i.index(" ")
     number = int(i[0:index])
     item = i[index+1:]
