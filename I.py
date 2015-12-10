@@ -16,24 +16,34 @@ def get_fire(g):
     return False
 
 
-def next_step(g, dim, robot):
+def next_step(g, robot):
     new_game = copy.deepcopy(g)
-    for i in range(dim[0]):
-        for j in range(dim[1]):
+    for i in range(len(g)):
+        for j in range(len(g[i])):
+            dim_0 = len(g)
+            dim_1 = len(g[i])
             if g[i][j] == "f":
                 new_game[i][j] = "."
-                if (i + 1) in range(dim[0]):
-                    if g[i + 1][j] == "X":
+                try:
+                    if g[i + 1][j] == "X" and (i + 1) >= 0:
                         new_game[i + 1][j] = "f"
-                if (i - 1) in range(dim[0]):
-                    if g[i - 1][j] == "X":
+                except:
+                    pass
+                try:
+                    if g[i - 1][j] == "X" and (i - 1) >= 0:
                         new_game[i - 1][j] = "f"
-                if (j + 1) in range(dim[1]):
-                    if g[i][j + 1] == "X":
+                except:
+                    pass
+                try:
+                    if g[i][j + 1] == "X" and (j + 1) >= 0:
                         new_game[i][j + 1] = "f"
-                if (j - 1) in range(dim[1]):
-                    if g[i][j - 1] == "X":
+                except:
+                    pass
+                try:
+                    if g[i][j - 1] == "X" and (j - 1) >= 0:
                         new_game[i][j - 1] = "f"
+                except:
+                    pass
     return new_game
 
 
@@ -45,14 +55,16 @@ for line in sys.stdin:
     my_input.append(line)
 
 dim = [int(my_input[0].split(",")[0]), int(my_input[0].split(",")[1])]
-game = [[0 for x in range(dim[1])] for x in range(dim[0])]
+game = []
 
 for i in range(dim[0]):
-    for j in range(dim[1]):
-        game[i][j] = my_input[i + 1][j]
+    game.append([])
+    for j in range(len(my_input[i + 1])):
+        game[i].append(my_input[i + 1][j])
 
 print_game(game)
 
+prev_robot = "."
 while get_fire(game):
-    game = next_step(game, dim, "N")
+    game = next_step(game, ("N", prev_robot))
     print_game(game)
