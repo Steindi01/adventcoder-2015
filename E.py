@@ -1,14 +1,15 @@
 import sys
 from itertools import product
 
+
 def checkGame(height, starting_height, diamond_height, ground, ceil, length_dungeon, path):
     steps = 1
     current_position = starting_height
     for i in range(len(path)):
         current_position += path[i]
-        if current_position > (height - ceil[i+1]):
+        if current_position > (height - ceil[i + 1]):
             return (steps, False)
-        if current_position <= ground[i+1]:
+        if current_position <= ground[i + 1]:
             return (steps, False)
         steps += 1
 
@@ -16,6 +17,7 @@ def checkGame(height, starting_height, diamond_height, ground, ceil, length_dung
         return (steps, True)
     else:
         return (steps, False)
+
 
 def binToList(bin_string, length):
     path = []
@@ -36,7 +38,7 @@ for line in sys.stdin:
     my_input.append(line)
 
 height = int(my_input[0])
-starting_height = int(height/2)
+starting_height = int(height / 2)
 diamond_height = 0
 ground = []
 ceil = []
@@ -59,8 +61,9 @@ diamond = False
 i = 0
 while i < (2**(length_dungeon - 1) - 1):
     p_binary = "{0:b}".format(i)
-    p = binToList(p_binary, length_dungeon-1)
-    (d, dia) = checkGame(height, starting_height, diamond_height, ground, ceil, length_dungeon, p)
+    p = binToList(p_binary, length_dungeon - 1)
+    (d, dia) = checkGame(height, starting_height,
+                         diamond_height, ground, ceil, length_dungeon, p)
     if dia:
         diamond = True
     if d > max_dungeon:
@@ -74,10 +77,9 @@ while i < (2**(length_dungeon - 1) - 1):
     while len(p_binary2) < (length_dungeon - 1):
         p_binary2 = p_binary2 + "0"
     i += int(p_binary2, 2) - int(p_binary1, 2)
-    #print i
+    # print i
 
 if diamond:
     print "The bat reaches step", max_dungeon, "and gets the diamond"
 else:
     print "The bat reaches step", max_dungeon
-

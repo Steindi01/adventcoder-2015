@@ -1,6 +1,7 @@
 import sys
 import math
 
+
 def calc_price(n, i, p):
     minimum_number = [1, 5, 10, 100]
     if n <= 4:
@@ -15,7 +16,7 @@ def calc_price(n, i, p):
         return int(n * p[i][index])
     else:
         real_amount = int(n * p[i][index])
-        virtual_amount = int(minimum_number[index+1] * p[i][index+1])
+        virtual_amount = int(minimum_number[index + 1] * p[i][index + 1])
         if real_amount < virtual_amount:
             return real_amount
         else:
@@ -37,10 +38,10 @@ for line in sys.stdin:
 
 sum_price = 0
 num_products = int(my_input[0])
-for i in my_input[1:num_products+1]:
+for i in my_input[1:num_products + 1]:
     index = i.index(" ")
     number = int(i[0:index])
-    item = i[index+1:]
+    item = i[index + 1:]
     if item.endswith("s"):
         item = item[:-1]
     sum_price += calc_price(number, item, prices)

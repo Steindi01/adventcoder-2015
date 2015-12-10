@@ -1,10 +1,12 @@
 import sys
 import copy
 
+
 def print_game(g):
     for i in g:
         print i
     print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
 
 def get_fire(g):
     for i in g:
@@ -13,6 +15,7 @@ def get_fire(g):
                 return True
     return False
 
+
 def next_step(g, dim, robot):
     new_game = copy.deepcopy(g)
     for i in range(dim[0]):
@@ -20,20 +23,17 @@ def next_step(g, dim, robot):
             if g[i][j] == "f":
                 new_game[i][j] = "."
                 if (i + 1) in range(dim[0]):
-                    if g[i+1][j] == "X":
-                        new_game[i+1][j] = "f"
+                    if g[i + 1][j] == "X":
+                        new_game[i + 1][j] = "f"
                 if (i - 1) in range(dim[0]):
-                    if g[i-1][j] == "X":
-                        new_game[i-1][j] = "f"
+                    if g[i - 1][j] == "X":
+                        new_game[i - 1][j] = "f"
                 if (j + 1) in range(dim[1]):
-                    if g[i][j+1] == "X":
-                        new_game[i][j+1] = "f"
+                    if g[i][j + 1] == "X":
+                        new_game[i][j + 1] = "f"
                 if (j - 1) in range(dim[1]):
-                    if g[i][j-1] == "X":
-                        new_game[i][j-1] = "f"
-                        
-
-
+                    if g[i][j - 1] == "X":
+                        new_game[i][j - 1] = "f"
     return new_game
 
 

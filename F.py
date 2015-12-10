@@ -1,5 +1,6 @@
 import sys
 
+
 def print_game(g):
     for i in g:
         print i
@@ -15,7 +16,7 @@ dim = int(my_input[0])
 position = my_input[1].split(",")
 pos = [int(position[1]), int(position[0])]
 
-if not (0 in pos or (dim -1) in pos):
+if not (0 in pos or (dim - 1) in pos):
     game = [[0 for x in range(dim)] for x in range(dim)]
 
     for i in range(dim):
@@ -37,66 +38,66 @@ if not (0 in pos or (dim -1) in pos):
             break
         if (dim - 1) in pos:
             break
-        
+
         if direction == "N":
             if game[pos[0] - 1][pos[1]] == " ":
                 print "straight"
                 direction = "N"
                 pos = [pos[0] - 1, pos[1]]
-            
+
             elif game[pos[0]][pos[1] + 1] == " ":
                 print "right"
                 direction = "E"
                 pos = [pos[0], pos[1] + 1]
-            
+
             elif game[pos[0]][pos[1] - 1] == " ":
                 print "left"
                 direction = "W"
                 pos = [pos[0], pos[1] - 1]
-        
+
         elif direction == "E":
             if game[pos[0]][pos[1] + 1] == " ":
                 print "straight"
                 direction = "E"
                 pos = [pos[0], pos[1] + 1]
-            
+
             elif game[pos[0] + 1][pos[1]] == " ":
                 print "right"
                 direction = "S"
                 pos = [pos[0] + 1, pos[1]]
-            
+
             elif game[pos[0] - 1][pos[1]] == " ":
                 print "left"
                 direction = "N"
                 pos = [pos[0] - 1, pos[1]]
-        
+
         elif direction == "S":
             if game[pos[0] + 1][pos[1]] == " ":
                 print "straight"
                 direction = "S"
                 pos = [pos[0] + 1, pos[1]]
-            
+
             elif game[pos[0]][pos[1] - 1] == " ":
                 print "right"
                 direction = "W"
                 pos = [pos[0], pos[1] - 1]
-            
+
             elif game[pos[0]][pos[1] + 1] == " ":
                 print "left"
                 direction = "E"
                 pos = [pos[0], pos[1] + 1]
-        
+
         elif direction == "W":
             if game[pos[0]][pos[1] - 1] == " ":
                 print "straight"
                 direction = "W"
                 pos = [pos[0], pos[1] - 1]
-            
+
             elif game[pos[0] - 1][pos[1]] == " ":
                 print "right"
                 direction = "N"
                 pos = [pos[0] - 1, pos[1]]
-            
+
             elif game[pos[0] + 1][pos[1]] == " ":
                 print "left"
                 direction = "S"

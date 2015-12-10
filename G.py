@@ -1,9 +1,11 @@
 import sys
 
+
 def print_game(g):
     for i in g:
         print i
-weather = ["sun", "sun", "clouds", "overcast", "rain", "snow", "snow", "overcast", "overcast", "fog", "clouds", "sun", "clouds", "clouds", "sun", "sun", "sun", "sun", "clouds", "snow", "snow", "snow", "overcast", "clouds", "sun", "clouds", "sun", "fog", "clouds", "sun", "clouds"]
+weather = ["sun", "sun", "clouds", "overcast", "rain", "snow", "snow", "overcast", "overcast", "fog", "clouds", "sun", "clouds", "clouds",
+           "sun", "sun", "sun", "sun", "clouds", "snow", "snow", "snow", "overcast", "clouds", "sun", "clouds", "sun", "fog", "clouds", "sun", "clouds"]
 order = ["sun", "clouds", "overcast", "fog", "rain", "snow"]
 my_input = []
 
@@ -16,10 +18,10 @@ forecast = {}
 for i in range(len(weather)):
     weather_array = ["", "", ""]
     weather_forecast = ""
-    day0 = i-2
-    day1 = i-1
+    day0 = i - 2
+    day1 = i - 1
     day2 = i
-    day_forecast = i+1
+    day_forecast = i + 1
     if day0 >= 0:
         weather_array[0] = weather[day0]
     if day1 >= 0:

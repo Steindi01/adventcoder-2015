@@ -9,7 +9,7 @@ for line in sys.stdin:
     my_input.append(line)
 
 height = int(my_input[0])
-starting_height = int(height/2)
+starting_height = int(height / 2)
 diamond_height = 0
 ground = []
 ceil = []
@@ -56,4 +56,3 @@ else:
 #     print "The bat reaches step", max_dungeon, "and gets the diamond"
 # else:
 #     print "The bat reaches step", max_dungeon
-

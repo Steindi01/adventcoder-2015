@@ -24,7 +24,7 @@ class slope(object):
         while total_length > ak:
             full_slopes += 1
             total_length -= ak
-        return round(full_slopes * hyp + (total_length/ak) * hyp)
+        return round(full_slopes * hyp + (total_length / ak) * hyp)
 
     """docstring for slope"""
 
