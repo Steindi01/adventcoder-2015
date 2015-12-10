@@ -2,6 +2,7 @@ import sys
 import copy
 import math
 
+
 def print_game(g):
     print get_robo_pos(g)
     for i in g:
@@ -83,7 +84,6 @@ def robot_do_step(g, direction, p_robot):
     return (g, p_robot)
 
 
-
 def robot_get_direction(g):
     r_pos = get_robo_pos(g)
     min_dist = 100
@@ -95,8 +95,8 @@ def robot_get_direction(g):
             if j == "f":
                 delta_x = r_pos[0] - index_i
                 delta_y = r_pos[1] - index_j
-                if math.sqrt(delta_x**2 + delta_y **2) < min_dist:
-                    min_dist = math.sqrt(delta_x**2 + delta_y **2)
+                if math.sqrt(delta_x**2 + delta_y ** 2) < min_dist:
+                    min_dist = math.sqrt(delta_x**2 + delta_y ** 2)
                     temp_r_pos[0] = index_i
                     temp_r_pos[1] = index_j
             index_j += 1
@@ -111,13 +111,17 @@ def robot_get_direction(g):
         direction += "W"
     if temp_r_pos[1] > r_pos[1]:
         direction += "E"
-
-
-
-
-    print direction
+    
     return direction
 
+
+def get_number_buildings(g):
+    number = 0
+    for i in g:
+        for j in i:
+            if j == "X":
+                number += 1
+    return number
 
 my_input = []
 
@@ -134,11 +138,16 @@ for i in range(dim[0]):
     for j in range(len(my_input[i + 1])):
         game[i].append(my_input[i + 1][j])
 
-print_game(game)
+#print_game(game)
 
 prev_robot = "."
 while get_fire(game):
     d = robot_get_direction(game)
     (game, prev_robot) = robot_do_step(game, d, prev_robot)
     game = next_step(game)
-    print_game(game)
+    # print_game(game)
+
+n = get_number_buildings(game)
+if prev_robot == "X" or prev_robot == "f":
+    n += 1
+print n, "buildings remaining"
