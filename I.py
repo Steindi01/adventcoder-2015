@@ -1,6 +1,7 @@
 import sys
 import copy
 import math
+from priodict import priorityDictionary
 
 
 def print_game(g):
@@ -106,7 +107,7 @@ def robot_get_direction(g):
         direction += "W"
     if temp_r_pos[1] > r_pos[1]:
         direction += "E"
-    
+
     return direction
 
 
@@ -119,6 +120,69 @@ def get_number_buildings(g):
     return number
 
 my_input = []
+
+
+def find_shortest_path(graph, start, end, path=[]):
+    path = path + [start]
+    if start == end:
+        return path
+    if not graph.has_key(start):
+        return None
+    shortest = None
+    for node in graph[start]:
+        if node not in path:
+            newpath = find_shortest_path(graph, node, end, path)
+            if newpath:
+                if not shortest or len(newpath) < len(shortest):
+                    shortest = newpath
+    return shortest
+
+
+def find_path(graph, start, end, path=[]):
+    path = path + [start]
+    if start == end:
+        return path
+    if not graph.has_key(start):
+        return None
+    for node in graph[start]:
+        if node not in path:
+            newpath = find_path(graph, node, end, path)
+            if newpath:
+                return newpath
+    return None
+
+
+def path(g):
+    graph = {}
+    index_i = 0
+    for i in g:
+        index_j = 0
+        for j in g:
+            if g[index_i][index_j] != "X":
+                graph[(index_i, index_j)] = []
+                if index_i - 1 >= 0 and index_i - 1 < len(g):
+                    if g[index_i - 1][index_j] != "X":
+                        graph[(index_i, index_j)].append(
+                            (index_i - 1, index_j))
+                if index_i + 1 >= 0 and index_i + 1 < len(g):
+                    if g[index_i + 1][index_j] != "X":
+                        graph[(index_i, index_j)].append(
+                            (index_i + 1, index_j))
+                if index_j - 1 >= 0 and index_j - 1 < len(i):
+                    if g[index_i][index_j - 1] != "X":
+                        graph[(index_i, index_j)].append(
+                            (index_i, index_j - 1))
+                if index_j + 1 >= 0 and index_j + 1 < len(i):
+                    if g[index_i][index_j + 1] != "X":
+                        graph[(index_i, index_j)].append(
+                            (index_i, index_j + 1))
+            index_j += 1
+        index_i += 1
+    # for gr in graph:
+    #     print gr, len(graph[gr]), graph[gr]
+    # print find_shortest_path(graph, (0, 1), (1, 1))
+    print find_path(graph, (0, 1), (6, 6))
+
 
 for line in sys.stdin:
     line = line.replace("\r", "")
@@ -140,6 +204,7 @@ while get_fire(game):
     game = robot_do_step(game, d)
     game = next_step(game)
     print_game(game)
+    path(game)
 
 n = get_number_buildings(game)
 print n, "buildings remaining"
